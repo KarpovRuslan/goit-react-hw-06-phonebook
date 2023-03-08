@@ -1,8 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import css from './Filter.module.css';
+import { useDispatch } from 'react-redux';
+import { filterContact } from 'redux/contactsSlice';
+import PropTypes from 'prop-types';
 
-export default function Filter({ value, onChange }) {
+export default function Filter() {
+  const dispatch = useDispatch();
+
   return (
     <>
       <label htmlFor="find" className={css.Filter}>
@@ -10,19 +14,13 @@ export default function Filter({ value, onChange }) {
       </label>
       <input
         type="text"
-        value={value}
         className={css.Filter__input}
-        onChange={onChange}
+        onChange={e => dispatch(filterContact(e.target.value.toLowerCase()))}
       />
     </>
   );
 }
 
 Filter.propTypes = {
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.array,
-  ]),
   onChange: PropTypes.func.isRequired,
 };
