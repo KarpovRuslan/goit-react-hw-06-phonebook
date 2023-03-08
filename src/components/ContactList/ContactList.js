@@ -35,5 +35,5 @@ export default function ContactList() {
 }
 
 ContactList.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };

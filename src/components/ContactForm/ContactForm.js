@@ -7,10 +7,10 @@ import { addContact } from 'redux/contactsSlice';
 
 export default function ContactForm() {
   const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts);
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
-  const contacts = useSelector(state => state.contacts);
 
   const nameInputId = nanoid();
   const numberInputId = nanoid();
@@ -25,14 +25,9 @@ export default function ContactForm() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const contact = {
-      name,
-      number,
-      id: nanoid(),
-    };
 
     if (!contacts.find(el => el.name === name)) {
-      dispatch(addContact(contact));
+      dispatch(addContact({ name, number, id: nanoid() }));
     } else {
       alert(`${name} is already in contacts`);
     }
